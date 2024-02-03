@@ -69,7 +69,7 @@ Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integ
 
 ## Nest.js-Validierung mit zod
 
-Seit einiger Zeit hat die Validation Library `zod` in der TypeScript-Community viel Aufmerksamkeit erhalten. Sie erlaubt uns einen umgekehrten Ansatz, indem sie uns ermöglicht, den Validierungs-Code zuerst zu schreiben. Die Modellierung der Typen erledigt die Library dann voll automatisch. Dazu nutzt sie fortgeschrittene TypeScript-Features und erstellt die Typen automatisch aus unserem Validierungs-Code. Dies kann für unser Beispiel so aussehen:
+Seit einiger Zeit hat die Validation Library `zod` in der TypeScript-Community viel Aufmerksamkeit erhalten. Sie erlaubt einen umgekehrten Ansatz, indem sie uns ermöglicht, den Validierungs-Code zuerst zu schreiben. Die Modellierung der Typen erledigt die Library dann vollautomatisch. Dazu nutzt sie fortgeschrittene TypeScript-Features und erstellt die Typen aus unserem Validierungs-Code. Dies kann für unser Beispiel so aussehen:
 
 ```typescript
 import { z } from 'zod';
