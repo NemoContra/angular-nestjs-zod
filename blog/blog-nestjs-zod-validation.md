@@ -13,7 +13,7 @@ Nest.js bietet bereits die Built-In `ValidationPipe` an. Diese setzt auf die npm
 Beispiel:
 
 ```typescript
-import { IsBoolean, IsDateString, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsDateString, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class FlightDto {
   @IsString()
