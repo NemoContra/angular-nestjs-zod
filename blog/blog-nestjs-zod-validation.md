@@ -176,7 +176,7 @@ Dies beweist, dass die Validierung sowohl auf der Typenebene als auch zur Laufze
 
 ## Fazit
 
-Die Library `zod` ermöglicht es, Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann `zod` auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Anwendungen mit aufwändiger fachlicher Logik, die viel Validierung verlangt, können davon besonders profitieren.
+Die Library `zod` ermöglicht es, Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann `zod` auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Applikationen mit aufwändiger fachlicher Logik, die viel Validierung verlangt, können davon profitieren.
 
 ## Quellen
 
