@@ -35,7 +35,7 @@ export class FlightDto {
 }
 ```
 
-[Zum Code]()
+[Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/libs/shared/util/api-models/src/lib/flight-dto.ts)
 
 In einem Nest.js Controller findet dann die Validierung wie folgt statt:
 
@@ -61,7 +61,7 @@ export class FlightController {
 }
 ```
 
-[Zum Code]()
+[Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/apps/api/src/app/flight/flight.controller.ts)
 
 Für eine solche Verwendung im TypeScript strict mode muss die `tsconfig.json` unter `compilerOptions` mit `"strictPropertyInitialization": false` ergänzt werden.
 
@@ -86,7 +86,7 @@ export const flightSchema = z
 export type Flight = z.infer<typeof flightSchema>;
 ```
 
-[Zum Code]()
+[Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/libs/shared/util/api-models/src/lib/flight.ts)
 
 Wir definieren also mittels der von `zod` importieren Funktionen die gesamte Beschaffenheit unseres Objektes und reichern es im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns `zod` am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
 
@@ -112,7 +112,7 @@ export class FlightService {
 }
 ```
 
-[Zum Code]()
+[Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/apps/client/src/app/flight.service.ts)
 
 TypeScript kann nun auf der Typen-Ebene sicherstellen, dass nur ein korrekter Flug übergeben werden kann:
 
@@ -137,7 +137,7 @@ export class ZodValidationPipe implements PipeTransform {
 }
 ```
 
-[Zum Code]()
+[Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/apps/api/src/app/common/zod-validation-pipe.ts)
 
 Im Controller wird die Pipe nun wie folgt eingebunden, um die Validierung für einen bestimmten Request zu aktivieren:
 
@@ -164,7 +164,7 @@ export class FlightController {
 }
 ```
 
-[Zum Code]()
+[Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/apps/api/src/app/flight/flight.controller.ts)
 
 Wenn wir nun ein invalides Objekt an unsere API senden können wir folgenden Fehler sehen:
 
