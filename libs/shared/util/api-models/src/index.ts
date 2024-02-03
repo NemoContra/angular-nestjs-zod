@@ -1,1 +1,2 @@
-export * from './lib/shared-util-api-models';
+export * from './lib/flight';
+export * from './lib/flight-dto';

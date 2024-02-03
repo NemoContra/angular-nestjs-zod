@@ -15,7 +15,7 @@ Beispiel:
 ```typescript
 import { IsBoolean, IsDateString, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class Flight {
+export class FlightDto {
   @IsString()
   @MinLength(5)
   @MaxLength(100)
@@ -35,12 +35,14 @@ export class Flight {
 }
 ```
 
-In einem Nest.js-Controller findet dann die Validierung wie folgt statt:
+[Zum Code]()
+
+In einem Nest.js Controller findet dann die Validierung wie folgt statt:
 
 ```typescript
 import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { FlightService } from './flight.service';
-import { FlightDto } from '../models/flight';
+import { FlightDto } from '@angular-nestjs-zod/shared/util/api-models';
 
 @Controller('flights')
 export class FlightController {
@@ -58,6 +60,10 @@ export class FlightController {
   }
 }
 ```
+
+[Zum Code]()
+
+Für eine solche Verwendung im TypeScript strict mode muss die `tsconfig.json` unter `compilerOptions` mit `"strictPropertyInitialization": false` ergänzt werden.
 
 Durch den deklarativen Ansatz ist der Code sehr gut lesbar, die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Dieser Ansatz hat aber auch Nachteile. Zum Beispiel lassen sich die Libraries `class-validator` und `class-transformer` im frontend nicht ohne optimal nutzen, da einige Features der Library die Abhängigkeit `reflect-metadata` verwenden und diese eine Erhöhung der Frontend-Bundle-Size mit sich bringt. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library ngrx in Angular.
 
@@ -79,6 +85,8 @@ export const flightSchema = z
 
 export type Flight = z.infer<typeof flightSchema>;
 ```
+
+[Zum Code]()
 
 Wir definieren also mittels der von `zod` importieren Funktionen die gesamte Beschaffenheit unseres Objektes und reichern es im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns `zod` am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
 
@@ -104,6 +112,8 @@ export class FlightService {
 }
 ```
 
+[Zum Code]()
+
 TypeScript kann nun auf der Typen-Ebene sicherstellen, dass nur ein korrekter Flug übergeben werden kann:
 
 ![TypeScript zeigt einen Fehler wenn der Flight nicht vollständig ist](ts-flight-error.png)
@@ -126,6 +136,8 @@ export class ZodValidationPipe implements PipeTransform {
   }
 }
 ```
+
+[Zum Code]()
 
 Im Controller wird die Pipe nun wie folgt eingebunden, um die Validierung für einen bestimmten Request zu aktivieren:
 
@@ -151,6 +163,8 @@ export class FlightController {
   }
 }
 ```
+
+[Zum Code]()
 
 Wenn wir nun ein invalides Objekt an unsere API senden können wir folgenden Fehler sehen:
 
