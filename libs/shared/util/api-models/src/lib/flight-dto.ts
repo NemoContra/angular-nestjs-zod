@@ -21,7 +21,6 @@ export class FlightDto {
   @IsDateString()
   time: string;
 
-  @IsOptional()
   @IsBoolean()
   delayed: boolean;
 }
