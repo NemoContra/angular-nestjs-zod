@@ -1,6 +1,6 @@
 # Validierte und typensichere REST-Schnittstellen mit Nest.js und zod
 
-Ein großer Vorteil von TypeScript im Backend, ist die Möglichkeit Typen und Interfaces zwischen Frontend und Server zu teilen. Dies wird in einem Nx Workspace besonders einfach, in diesem lassen sich mittels Models zwischen Frontend und Server teilen. Somit kann sichergestellt werden, dass auf der Typen-Ebene bereits nicht viel schiefgehen kann. Da TypeScript aber zur Laufzeit nicht mehr existiert und Daten bei REST in der Regel mittels untypisiertem JSON übertragen werden, sollte zusätzlich eine Validierung der Daten am Backend stattfinden. Validierung am Backend ist wichtig für die Sicherheit der Schnittstelle und damit der gesamten Anwendung. Zusätzlich können über die Validierung bereits fachlich ungültige Daten ausgefiltert oder abgelehnt werden.
+Ein großer Vorteil von TypeScript im Backend, ist die Möglichkeit Typen und Interfaces zwischen Frontend und Server zu teilen. Dies wird in einem Nx Workspace besonders einfach, in diesem lassen sich mittels Models zwischen Frontend und Server teilen. Somit kann sichergestellt werden, dass auf der Typenebene bereits nicht viel schiefgehen kann. Da TypeScript aber zur Laufzeit nicht mehr existiert und Daten bei REST in der Regel mittels untypisiertem JSON übertragen werden, sollte zusätzlich eine Validierung der Daten am Backend stattfinden. Validierung am Backend ist wichtig für die Sicherheit der Schnittstelle und damit der gesamten Anwendung. Zusätzlich können über die Validierung bereits fachlich ungültige Daten ausgefiltert oder abgelehnt werden.
 
 In diesem Artikel wird gezeigt, wie mit der Library `zod` ein alternativer Ansatz zur Built-In `ValidationPipe` von Nest.js zur Validierung von Daten implementiert werden kann.
 
@@ -114,7 +114,7 @@ export class FlightService {
 
 [Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/apps/client/src/app/flight.service.ts)
 
-TypeScript kann nun auf der Typen-Ebene sicherstellen, dass nur ein korrekter Flug übergeben werden kann:
+TypeScript kann nun auf der Typenebene sicherstellen, dass nur ein korrekter Flug übergeben werden kann:
 
 ![TypeScript zeigt einen Fehler wenn der Flight nicht vollständig ist](ts-flight-error.png)
 
