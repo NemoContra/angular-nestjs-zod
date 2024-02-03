@@ -1,6 +1,6 @@
 # Validierte und typensichere REST-Schnittstellen mit Nest.js und zod
 
-Ein großer Vorteil von TypeScript im Backend, ist die Möglichkeit Typen und Interfaces zwischen Frontend und Server zu teilen. Dies wird in einem Nx Workspace besonders einfach, in diesem lassen sich mittels Models zwischen Frontend und Server teilen. Somit kann sichergestellt werden, dass auf der Typenebene bereits nicht viel schiefgehen kann. Da TypeScript aber zur Laufzeit nicht mehr existiert und Daten bei REST in der Regel mittels untypisiertem JSON übertragen werden, sollte zusätzlich eine Validierung der Daten am Backend stattfinden. Validierung am Backend ist wichtig für die Sicherheit der Schnittstelle und damit der gesamten Anwendung. Zusätzlich können über die Validierung bereits fachlich ungültige Daten ausgefiltert oder abgelehnt werden.
+Ein großer Vorteil von TypeScript im Backend ist die Möglichkeit, Typen und Interfaces zwischen Frontend und Server zu teilen. Dies wird in einem Nx Workspace besonders einfach, denn in diesem lassen sich Models mittels Libs zwischen Frontend und Server teilen. Somit kann sichergestellt werden, dass auf der Typenebene nicht viel schiefgehen kann. Da TypeScript aber zur Laufzeit nicht mehr existiert und Daten bei REST in der Regel mittels untypisiertem JSON übertragen werden, sollte zusätzlich eine Validierung der Daten am Backend stattfinden. Validierung am Backend ist wichtig für die Sicherheit der Schnittstelle und damit der gesamten Anwendung. Zusätzlich können über die Validierung bereits fachlich ungültige Daten ausgefiltert oder abgelehnt werden.
 
 In diesem Artikel wird gezeigt, wie mit der Library `zod` ein alternativer Ansatz zur Built-In `ValidationPipe` von Nest.js zur Validierung von Daten implementiert werden kann.
 
@@ -8,7 +8,7 @@ In diesem Artikel wird gezeigt, wie mit der Library `zod` ein alternativer Ansat
 
 ## Die Nest.js ValidationPipe
 
-Nest.js bietet bereits die Built-In `ValidationPipe` an. Diese setzt auf die npm-Libraries `class-validator` und `class-transformer` und fährt damit einen objektorientierten und deklarativen Ansatz. Die Validierung wird definiert, indem zuerst die Datenstruktur modelliert wird. Die Validierungsinformationen können dann mittels Decorators als Metadaten bereitgestellt werden.
+Nest.js bietet bereits die Built-In `ValidationPipe` an. Diese setzt auf die npm-Libraries `class-validator` und `class-transformer` und verfolgt damit einen objektorientierten und deklarativen Ansatz. Die Validierung wird definiert, indem zuerst die Datenstruktur modelliert wird. Im Anschluss können die Validierungsinformationen dann mittels Decorators als Metadaten bereitgestellt werden.
 
 Beispiel:
 
@@ -65,11 +65,11 @@ export class FlightController {
 
 Für eine solche Verwendung im TypeScript strict mode muss die `tsconfig.json` unter `compilerOptions` mit `"strictPropertyInitialization": false` ergänzt werden.
 
-Durch den deklarativen Ansatz ist der Code sehr gut lesbar, die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Dieser Ansatz hat aber auch Nachteile. Zum Beispiel lassen sich die Libraries `class-validator` und `class-transformer` im frontend nicht ohne optimal nutzen, da einige Features der Library die Abhängigkeit `reflect-metadata` verwenden und diese eine Erhöhung der Frontend-Bundle-Size mit sich bringt. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library ngrx in Angular.
+Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Jedoch hat dieser Ansatz auch Nachteile. Zum Beispiel lassen sich die Libraries `class-validator` und `class-transformer` im Frontend nicht optimal nutzen, da einige Features der Library die Abhängigkeit `reflect-metadata` verwenden und diese eine Erhöhung der Frontend-Bundle-Size mit sich bringt. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library ngrx in Angular.
 
 ## Nest.js-Validierung mit zod
 
-Seit einiger Zeit hat die Validation Library `zod` in der TypeScript-Community viel Aufmerksamkeit bekommen. Sie erlaubt es, die Verantwortlichkeiten herumzudrehen und uns als Entwickler erst den Validierungs-Code schreiben zu lassen. Um die Modellierung der Typen kümmert sich die Library dann voll automatisch. Dazu nutzt sie sehr klug fortgeschrittene TypeScript-Features und erstellt die Typen automatisch aus unserem Validierungs-Code. Dies kann für unser Beispiel so aussehen:
+Seit einiger Zeit hat die Validation Library `zod` in der TypeScript-Community viel Aufmerksamkeit erhalten. Sie erlaubt einen umgekehrten Ansatz, indem sie uns ermöglicht, den Validierungs-Code zuerst zu schreiben. Die Modellierung der Typen erledigt die Library dann vollautomatisch. Dazu nutzt sie fortgeschrittene TypeScript-Features und erstellt die Typen aus unserem Validierungs-Code. Dies kann für unser Beispiel so aussehen:
 
 ```typescript
 import { z } from 'zod';
@@ -88,7 +88,7 @@ export type Flight = z.infer<typeof flightSchema>;
 
 [Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/libs/shared/util/api-models/src/lib/flight.ts)
 
-Wir definieren also mittels der von `zod` importieren Funktionen die gesamte Beschaffenheit unseres Objektes und reichern es im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns `zod` am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
+Wir definieren also mittels der von `zod` importieren Funktionen die gesamte Beschaffenheit unseres Objektes und reichern diese im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns `zod` am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
 
 ```typescript
 import { inject, Injectable } from '@angular/core';
@@ -166,7 +166,7 @@ export class FlightController {
 
 [Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/apps/api/src/app/flight/flight.controller.ts)
 
-Wenn wir nun ein invalides Objekt an unsere API senden können wir folgenden Fehler sehen:
+Wenn wir nun ein invalides Objekt an unsere API senden, können wir folgenden Fehler sehen:
 
 ![Fehler 400](http-400.png)
 
@@ -176,7 +176,7 @@ Dies beweist, dass die Validierung sowohl auf der Typenebene als auch zur Laufze
 
 ## Fazit
 
-Die Library `zod` ermöglicht es Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann `zod` auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Anwendungen mit aufwändiger fachlicher Logik, die viel Validierung verlangt können davon besonders profitieren.
+Die Library `zod` ermöglicht es, Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann `zod` auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Applikationen mit aufwändiger fachlicher Logik, die viel Validierung verlangt, können davon profitieren.
 
 ## Quellen
 
