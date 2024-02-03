@@ -46,6 +46,9 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "proxyConfig": "config/proxy-config.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "client:build:production"
@@ -55,6 +58,13 @@
         }
       },
       "defaultConfiguration": "development"
+    },
+    "serve-app": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx serve api", "nx serve client"],
+        "parallel": true
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

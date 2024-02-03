@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angular-nestjs-zod/shared/util/api-models": [
+        "libs/shared/util/api-models/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
