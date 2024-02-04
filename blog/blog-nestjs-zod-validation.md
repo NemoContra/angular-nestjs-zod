@@ -2,7 +2,7 @@
 
 Ein großer Vorteil von TypeScript im Backend ist die Möglichkeit, Typen und Interfaces zwischen Frontend und Server zu teilen. Dies wird in einem Nx Workspace besonders einfach, denn in diesem lassen sich Models mittels Libs zwischen Frontend und Server teilen. Somit kann sichergestellt werden, dass auf der Typenebene nicht viel schiefgehen kann. Da TypeScript aber zur Laufzeit nicht mehr existiert und Daten bei REST in der Regel mittels untypisiertem JSON übertragen werden, sollte zusätzlich eine Validierung der Daten am Backend stattfinden. Validierung am Backend ist wichtig für die Sicherheit der Schnittstelle und damit der gesamten Anwendung. Zusätzlich können über die Validierung bereits fachlich ungültige Daten ausgefiltert oder abgelehnt werden.
 
-In diesem Artikel wird gezeigt, wie mit der Library `zod` ein alternativer Ansatz zur Built-In `ValidationPipe` von Nest.js zur Validierung von Daten implementiert werden kann.
+In diesem Artikel wird gezeigt, wie mit der Library **zod** ein alternativer Ansatz zur Built-In `ValidationPipe` von Nest.js zur Validierung von Daten implementiert werden kann.
 
 📂 [Source Code](https://github.com/NemoContra/angular-nestjs-zod)
 
@@ -68,7 +68,7 @@ Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integ
 
 ## Nest.js-Validierung mit zod
 
-Seit einiger Zeit erhält die Validation Library `zod` in der TypeScript-Community viel Aufmerksamkeit. Sie erlaubt einen umgekehrten Ansatz, indem sie uns ermöglicht, den Validierungs-Code zuerst zu schreiben. Die Modellierung der Typen erledigt die Library dann vollautomatisch. Dazu nutzt sie fortgeschrittene TypeScript-Features und erstellt die Typen aus unserem Validierungs-Code. Dies kann für unser Beispiel so aussehen:
+Seit einiger Zeit erhält die Validation Library **zod** in der TypeScript-Community viel Aufmerksamkeit. Sie erlaubt einen umgekehrten Ansatz, indem sie uns ermöglicht, den Validierungs-Code zuerst zu schreiben. Die Modellierung der Typen erledigt die Library dann vollautomatisch. Dazu nutzt sie fortgeschrittene TypeScript-Features und erstellt die Typen aus unserem Validierungs-Code. Dies kann für unser Beispiel so aussehen:
 
 ```typescript
 import { z } from 'zod';
@@ -87,7 +87,7 @@ export type Flight = z.infer<typeof flightSchema>;
 
 [Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/libs/shared/util/api-models/src/lib/flight.ts)
 
-Wir definieren also mittels der von `zod` importieren Funktionen die gesamte Beschaffenheit unseres Objektes und reichern diese im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns `zod` am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
+Wir definieren also mittels der von **zod** importieren Funktionen die gesamte Beschaffenheit unseres Objektes und reichern diese im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns **zod** am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
 
 ```typescript
 import { inject, Injectable } from '@angular/core';
@@ -176,7 +176,7 @@ Dies beweist, dass die Validierung sowohl auf der Typenebene als auch zur Laufze
 
 ## Fazit
 
-Die Library `zod` ermöglicht es, Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann `zod` auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Applikationen mit aufwändiger fachlicher Logik, die viel Validierung verlangt, können davon profitieren.
+Die Library **zod** ermöglicht es, Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann **zod** auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Applikationen mit aufwändiger fachlicher Logik, die viel Validierung verlangt, können davon profitieren.
 
 ## Quellen
 
