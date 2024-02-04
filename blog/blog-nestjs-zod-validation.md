@@ -8,7 +8,7 @@ In diesem Artikel wird gezeigt, wie mit der Library **zod** ein alternativer Ans
 
 ## Die Nest.js ValidationPipe
 
-Nest.js bietet bereits die Built-In `ValidationPipe` an. Diese setzt auf die npm-Libraries `class-validator` und `class-transformer` und verfolgt damit einen objektorientierten und deklarativen Ansatz. Die Validierung wird definiert, indem zuerst die Datenstruktur modelliert wird. Im Anschluss können die Validierungsinformationen dann mittels Decorators als Metadaten bereitgestellt werden.
+Nest.js bietet bereits die Built-In `ValidationPipe` an. Diese setzt auf die npm-Libraries **class-validator** und **class-transformer** und verfolgt damit einen objektorientierten und deklarativen Ansatz. Die Validierung wird definiert, indem zuerst die Datenstruktur modelliert wird. Im Anschluss können die Validierungsinformationen dann mittels Decorators als Metadaten bereitgestellt werden.
 
 Beispiel:
 
@@ -64,7 +64,7 @@ export class FlightController {
 
 Für eine solche Verwendung im TypeScript strict mode muss die `tsconfig.json` unter `compilerOptions` mit `"strictPropertyInitialization": false` ergänzt werden.
 
-Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Jedoch hat dieser Ansatz auch Nachteile. Zum Beispiel lassen sich die Libraries `class-validator` und `class-transformer` im Frontend nicht optimal nutzen, da einige Features der Library die Abhängigkeit `reflect-metadata` verwenden und diese eine Erhöhung der Frontend-Bundle-Size mit sich bringt. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library ngrx in Angular.
+Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Jedoch hat dieser Ansatz auch Nachteile. Zum Beispiel lassen sich die Libraries **class-validator** und **class-transformer** im Frontend nicht optimal nutzen, da einige Features der Library die Abhängigkeit `reflect-metadata` verwenden und diese eine Erhöhung der Frontend-Bundle-Size mit sich bringt. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library ngrx in Angular.
 
 ## Nest.js-Validierung mit zod
 
