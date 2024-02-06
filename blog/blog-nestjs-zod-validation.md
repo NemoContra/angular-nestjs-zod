@@ -64,7 +64,7 @@ export class FlightController {
 
 Für eine solche Verwendung im TypeScript strict mode muss die `tsconfig.json` unter `compilerOptions` mit `"strictPropertyInitialization": false` ergänzt werden.
 
-Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Jedoch hat dieser Ansatz auch Nachteile. Zum Beispiel bringen **class-validator** und **class-transformer** eine unverhältnismäßige Erhöhung der Bundle-Size mit sich und wirken sich somit negativ auf die Performance im Frontend aus. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library NgRx in Angular.
+Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Jedoch hat dieser Ansatz auch Nachteile. Zum Beispiel lassen sich die oben definierten DTO-Klassen nur eingeschränkt im Frontend benutzen, da **class-validator** und **class-transformer** eine unverhältnismäßige Erhöhung der Bundle-Size mit sich bringen und sich somit negativ auf die Performance auswirken können. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library NgRx in Angular.
 
 ## Nest.js-Validierung mit zod
 
@@ -176,13 +176,16 @@ Dies beweist, dass die Validierung sowohl auf der Typenebene als auch zur Laufze
 
 ## Fazit
 
-Die Library **zod** ermöglicht es, Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann **zod** auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Applikationen mit aufwändiger fachlicher Logik, die viel Validierung verlangt, können davon profitieren.
+Die Library **zod** ermöglicht es, Typen und Validierungsregeln in einem Schritt auf eine schlanke, einfache und gut lesbare Art und Weise zu erstellen. Mit wenigen Zeilen Code kann **zod** auch mit Nest.js benutzt werden. Dies kann die Sicherheit und Stabilität von Anwendungen deutlich erhöhen. Besonders Applikationen mit aufwändiger fachlicher Logik, die viel Validierung verlangt, können davon profitieren. Zusätzlich ist die Erhöhung der Frontend Bundle-Size durch **zod** in der Regel deutlich geringer als durch den Einsatz von **class-validator** und **class-transformer**.
 
 ## Quellen
 
 - [Nest.js Dokumentation - ValidationPipe](https://docs.nestjs.com/techniques/validation)
 - [Nest.js Dokumentation - Custom Validation with zod](https://docs.nestjs.com/pipes#binding-validation-pipes)
 - [zod Dokumentation](https://zod.dev/)
+- [Bundlephobia class-validator](https://bundlephobia.com/package/class-validator@0.14.1)
+- [Bundlephobia class-transformer](https://bundlephobia.com/package/class-transformer@0.5.1)
+- [Bundlephobia zod](https://bundlephobia.com/package/zod@3.22.4)
 
 ## Autoren
 
