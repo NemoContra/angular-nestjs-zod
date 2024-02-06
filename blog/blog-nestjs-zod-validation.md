@@ -87,7 +87,7 @@ export type Flight = z.infer<typeof flightSchema>;
 
 [Zum Code](https://github.com/NemoContra/angular-nestjs-zod/blob/main/libs/shared/util/api-models/src/lib/flight.ts)
 
-Wir definieren also mittels der von **zod** importieren Funktionen die gesamte Beschaffenheit unseres Objektes und reichern diese im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns **zod** am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
+Wir definieren also mittels der von **zod** importierten Funktionen die gesamte Beschaffenheit unseres Objektes und reichern diese im selben Schritt direkt mit Validierungsinformationen an. Den Typen kann uns **zod** am Ende mittels der Hilfsfunktion `z.infer` automatisch generieren. Der Typ `Flight` lässt sich nun über eine Nx lib teilen und somit im Frontend und Backend verwenden. So können wir zum Beispiel in einem Angular-Frontend einen neuen Flug wie folgt anlegen:
 
 ```typescript
 import { inject, Injectable } from '@angular/core';
