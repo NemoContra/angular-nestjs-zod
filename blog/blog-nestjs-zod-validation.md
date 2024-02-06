@@ -64,7 +64,7 @@ export class FlightController {
 
 Für eine solche Verwendung im TypeScript strict mode muss die `tsconfig.json` unter `compilerOptions` mit `"strictPropertyInitialization": false` ergänzt werden.
 
-Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Jedoch hat dieser Ansatz auch Nachteile. Zum Beispiel lassen sich die Libraries **class-validator** und **class-transformer** im Frontend nicht optimal nutzen, da einige Features der Library die Abhängigkeit **reflect-metadata** verwenden und diese eine eventuell ungewollte Erhöhung der Frontend-Bundle-Size mit sich bringt. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library NgRx in Angular.
+Durch den deklarativen Ansatz ist der Code sehr gut lesbar. Die eingebaute Integration in Nest.js macht die Validierung sehr leicht. Jedoch hat dieser Ansatz auch Nachteile. Zum Beispiel bringen **class-validator** und **class-transformer** eine unverhältnismäßige Erhöhung der Bundle-Size mit sich und wirken sich somit negativ auf die Performance im Frontend aus. Zusätzlich wird von einem Einsatz von Klassen in vielen Frontend State Management Libraries abgeraten, um die Serialisierbarkeit der Daten sicherzustellen. Dies gilt zum Beispiel auch für die State-Management-Library NgRx in Angular.
 
 ## Nest.js-Validierung mit zod
 
